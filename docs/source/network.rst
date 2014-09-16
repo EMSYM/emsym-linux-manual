@@ -22,3 +22,17 @@
 连接到指定的网络，比如EMSYM : iwconfig wlan0 essid "EMSYM";
 
 如果网络是加密的，密码是1234567890，则连接命令是：iwconfig wlan0 essid "EMSYM" key "1234567890";
+
+wpa 连接 wifi
+--------------
+ifconfig -a   //查看可用网络接口
+
+ifconfig wlan0 up     //启动无线网卡
+
+iwlist wlan0 scan      //查看可连接的无线网络
+
+wpa_passphrase "EMSYM" 12345678 > wpa.conf  //设置无线网卡账号和密码,例:ID:EMSYM 密码:12345678
+
+wpa_supplicant -B -i wlan0 -c wpa.conf   //为网络配置ID和密码
+
+udhcpc -i wlan0 //自动分配IP地址
