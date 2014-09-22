@@ -3,19 +3,29 @@ UBoot使用指南
 
 下载
 =========
-TODO
+https://github.com/EMSYM/U-boot
+
+* master分支是开发分支
+* 一般用户请用带发布标签的tag
 
 编译 UBoot
 ========================================
+第一步，生成配置文件
 
 .. sourcecode:: bash
 
-	make ARCH=arm blurr_mx6q_2g
+	make ARCH=arm mx6dl_blurr_config
 
 根据核心板的类型，改变相应参数。支持的参数：
 
-* blurr_mx6q_2g #四核，2GB内存
-* blurr_mx6dl_1g #双核精简版，1GB内存
+* mx6q_blurr_config #四核，2GB内存
+* mx6dl_blurr_config #双核精简版，1GB内存
+
+第二步，编译UBoot
+
+.. sourcecode:: bash
+
+	make CROSS_COMPILE=arm-linux-gnueabi-
 
 生成镜像
 ==============
