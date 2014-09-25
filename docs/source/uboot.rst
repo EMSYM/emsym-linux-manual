@@ -14,7 +14,7 @@ https://github.com/EMSYM/U-boot
 
 .. sourcecode:: bash
 
-	make ARCH=arm mx6dl_blurr_config
+	make mx6dl_blurr_config
 
 根据核心板的类型，改变相应参数。支持的参数：
 
@@ -26,6 +26,13 @@ https://github.com/EMSYM/U-boot
 .. sourcecode:: bash
 
 	make CROSS_COMPILE=arm-linux-gnueabi-
+
+烧写UBoot镜像
+============
+
+.. sourcecode:: bash
+
+	sudo dd if=u-boot.imx of=/dev/sdb bs=512 seek=2 ;sync
 
 生成镜像
 ==============
@@ -151,14 +158,7 @@ UBoot的这种设计为开发带来了极大的灵活性，我们可以只烧写
 .. sourcecode:: bash
 
 	mkimage -f linux.its kernel_fdt.itb
-
-烧写UBoot镜像
-============
-
-.. sourcecode:: bash
-
-	sudo dd if=u-boot.bin of=/dev/sdb bs=512 seek=2 skip=2 conv=fsync
-	sudo dd if=u-boot.imx of=/dev/sdb bs=512 seek=2 ;sync
+	# 烧写镜像
 	sudo dd if=kernel_fdt.itb of=/dev/sdb bs=512 seek=2048; sync
 
 .. tools/mkimage -n  imxcfg.imx -T imximage -e 0x17800000 -d u-boot.bin u-boot.imx
