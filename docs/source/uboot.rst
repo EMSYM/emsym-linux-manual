@@ -5,8 +5,26 @@ UBoot使用指南
 =========
 https://github.com/EMSYM/U-boot
 
-* master分支是开发分支
-* 一般用户请用带发布标签的tag
+.. sourcecode:: bash
+
+	git clone https://github.com/EMSYM/U-boot
+
+.. important::
+   在github列出来的分支都是开发分支，供开发人员使用。一般用户如果只是编译固件，并不想修改源码，请用带发布标签的tag。
+
+列出所有标签的命令：
+
+.. sourcecode:: bash
+
+	git tag -l
+	
+我们发布版本的时候，UBoot的版本号与Linux版本对应，所以请根据所需Linux选择对应的UBoot。
+
+例如，需要Linux内核的版本是3.10，那么请使用v3.10的UBoot。
+
+.. sourcecode:: bash
+
+	git checkout -b v3.10 blurr-3.10
 
 编译 UBoot
 ========================================
@@ -27,17 +45,22 @@ https://github.com/EMSYM/U-boot
 
 	make CROSS_COMPILE=arm-linux-gnueabi-
 
-烧写UBoot镜像
-============
+烧写UBoot
+==================
 
 .. sourcecode:: bash
 
 	sudo dd if=u-boot.imx of=/dev/sdb bs=512 seek=2 ;sync
 
-生成镜像
-==============
+至此，连接调试串口，主板上电，应该可以在终端看到UBoot的输出。
 
-主板配置文件
+
+.. _uboot-fdt:
+
+生成UBoot支持启动的内核镜像
+=========================
+
+主板配置文件（内核版本≥3.10）
 ------------------
 我们基于一款处理器可以研发各种各样的系统，每种系统的主板都是不一样的。
 对于这种情况，传统的Linux需要为每种主板定制不同的内核。
@@ -135,9 +158,6 @@ UBoot的这种设计为开发带来了极大的灵活性，我们可以只烧写
 		};
 	};
                           
-
-
-
 生成镜像
 -------------------------------------
 
@@ -164,25 +184,55 @@ UBoot的这种设计为开发带来了极大的灵活性，我们可以只烧写
 .. tools/mkimage -n  imxcfg.imx -T imximage -e 0x17800000 -d u-boot.bin u-boot.imx
 
 
-.. 旧版本UBoot
-	内核
-	将SD卡插入PC,执行: 
-	sudo dd if=arch/arm/boot/uImage of=/dev/sdb bs=512 seek=2048 conv=fsync ; sync
-	arm-linux-gnueabi-objcopy --gap-fill=0xff -O binary u-boot u-boot.bin
+旧版本UBoot（内核≤3.0）
+===============
+旧版本的UBoot或者旧版本的内核都不支持device tree，
+那么我们要采用uImage。生成uImage的方法参见 :ref:`uimage`
+
+将SD卡插入PC,执行: 
+
+.. sourcecode:: bash
+
+	sudo dd if=arch/arm/boot/uImage of=/dev/sdb bs=512 seek=2048; sync
+
+
+..	arm-linux-gnueabi-objcopy --gap-fill=0xff -O binary u-boot u-boot.bin
 
 .. arm-linux-gnueabi-gcc -E -x c "board/freescale/mx6qsabresd/mx6dl_4x_mt41j128.cfg" -I./include -o imxcfg.imx
 	uImage kernel
 	---------------
 
-	mmc dev 2;
-	mmc read 12000000 0x800 0x3000;
-	bootm;
+UBoot参数配置
+===============
+至此，UBoot 镜像和 Linux 内核已经烧写到 SD 卡。
 
-	setenv loadaddr 0x12000000
-	setenv bootargs_base 'setenv bootargs console=ttymxc3,115200'
+接下来配置 UBoot 的参数，加载内核。
+
+.. sourcecode:: bash
+
+	setenv loadaddr 0x12000000 # 设定在内存加载内核的位置
+
+	# 设定内核的启动参数
+	setenv bootargs 'console=ttymxc3,115200' # Linux 调试输出的串口
+	setenv bootargs ${bootargs} 'root=/dev/mmcblk0p1' # 根文件系统
+	setenv bootargs ${bootargs} 'init=/sbin/init' # 启动进程
+
+	saveenv # 保存以上参数，重启不会丢失
+
+	mmc dev 1; # 从1号 SD 卡加载内核镜像
+	mmc read ${loadaddr} 0x800 0x3000; # 读入镜像到内存
+	bootm; # 启动
+
+	# 希望上电时自动加载内核
+	setenv bootcmd 'mmc dev 1;mmc read ${loadaddr} 0x800 0x3000;bootm;'
+	saveenv
+
+
+.. setenv bootargs_base 'setenv bootargs console=ttymxc3,115200'
 	setenv bootargs_mmc 'setenv bootargs ${bootargs} init=/sbin/init root=/dev/mmcblk0p1 '
 	setenv bootargs_mmc 'setenv bootargs ${bootargs} init=/sbin/init initrd=0xf42400 root=/dev/ram0 rw'
 	setenv bootcmd 'run bootargs_base bootargs_mmc;mmc read ${loadaddr} 0x800 0x3000;bootm'	
+
 
 加入开机图片
 ============
