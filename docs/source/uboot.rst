@@ -20,11 +20,12 @@ https://github.com/EMSYM/U-boot
 	
 我们发布版本的时候，UBoot的版本号与Linux版本对应，所以请根据所需Linux选择对应的UBoot。
 
-例如，需要Linux内核的版本是3.10，那么请使用v3.10的UBoot。
+例如，需要Linux内核的版本是3.10，那么请使用v3.10的UBoot。现在推荐的是v4.1.15
 
 .. sourcecode:: bash
 
-	git checkout -b v3.10 blurr-3.10
+	git checkout -b v4.1 blurr-4.1.15 # 对应 Linux 内核版本 v4.1.15
+	git checkout -b v3.10 blurr-3.10 # 不同版本内核
 
 编译 UBoot
 ========================================
