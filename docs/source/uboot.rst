@@ -178,9 +178,12 @@ UBoot的这种设计为开发带来了极大的灵活性，我们可以只烧写
 
 .. sourcecode:: bash
 
-	mkimage -f linux.its kernel_fdt.itb
+	./tools/mkimage -f linux.its kernel_fdt.itb
 	# 烧写镜像
 	sudo dd if=kernel_fdt.itb of=/dev/sdb bs=512 seek=2048; sync
+
+如果在执行mkimage时提示`sh: 1: dtc: not found`,说明没有安装`device-tree-compiler`,debian系可以通过`sudo apt-get install device-tree-compiler
+`进行安装
 
 .. tools/mkimage -n  imxcfg.imx -T imximage -e 0x17800000 -d u-boot.bin u-boot.imx
 
