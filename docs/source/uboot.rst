@@ -46,6 +46,8 @@ https://github.com/EMSYM/U-boot
 
 	make CROSS_COMPILE=arm-linux-gnueabi-
 
+此时可能会出现 ``compiler-gcc6.h not found`` 的错误，可以从该地址<https://pan.baidu.com/s/1i5ssOGP>下载该文件，放在 ``u-boot/include/linux`` 下，再次执行命令即可
+
 烧写UBoot
 ==================
 
