@@ -46,6 +46,8 @@ https://github.com/EMSYM/U-boot
 
 	make CROSS_COMPILE=arm-linux-gnueabi-
 
+此时可能会出现 ``compiler-gcc6.h not found`` 的错误，可以从该地址<https://pan.baidu.com/s/1i5ssOGP>下载该文件，放在 ``u-boot/include/linux`` 下，再次执行命令即可
+
 烧写UBoot
 ==================
 
@@ -182,8 +184,7 @@ UBoot的这种设计为开发带来了极大的灵活性，我们可以只烧写
 	# 烧写镜像
 	sudo dd if=kernel_fdt.itb of=/dev/sdb bs=512 seek=2048; sync
 
-如果在执行mkimage时提示`sh: 1: dtc: not found`,说明没有安装`device-tree-compiler`,debian系可以通过`sudo apt-get install device-tree-compiler
-`进行安装
+如果在执行mkimage时提示 ``sh: 1: dtc: not found`` ,说明没有安装 ``device-tree-compiler`` ,debian系可以通过 ``sudo apt-get install device-tree-compiler`` 进行安装
 
 .. tools/mkimage -n  imxcfg.imx -T imximage -e 0x17800000 -d u-boot.bin u-boot.imx
 
