@@ -29,7 +29,7 @@ https://github.com/EMSYM/U-boot
 
 编译 UBoot
 ========================================
-第一步，生成配置文件
+第一步，生成配置文件(**注意，在U-boot文件夹下打开终端**)
 
 .. sourcecode:: bash
 
