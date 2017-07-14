@@ -54,7 +54,7 @@ Linux内核使用指南
 	git clone https://github.com/EMSYM/linux.git #下载代码
 	git checkout -b blurr-4.1.15 origin/blurr-4.1.15 #切换分支
 	# 编译内核
-	ARCH=arm make mx6dl_defconfig #配置内核
+	ARCH=arm make blurr_defconfig #配置内核
 	ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make -j8 #编译内核，生成zImage和dtb文件
 	# -j8指定你的cpu核数×2，即我的cpu核数为4，但也可不指定。
 	
