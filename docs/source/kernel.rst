@@ -105,23 +105,20 @@ SD卡需要创建2个分区，并且在第一个分区之前预留一段>=1MB的
 
 .. sourcecode:: bash
 
-	sudo fdisk /dev/sdb
-	# 输入t
-	# 选择分区：1
-	# 这里将分区1格式化为fat格式，输入6或者c都行
-	# 再次输入t
-	# 选择分区：2
-	# 将分区2格式化为ext4格式，输入83
-	# 保存退出
-	
+	mkfs.fat /dev/sdb1
+	# 这里将分区1格式化为fat格式
+	mkfs.ext4 /dev/sdb2
+	# 将分区2格式化为ext4格式
+	# 记得安全弹出
+
 至此，对于SD卡的处理就完成了
 	
 
 .. sourcecode:: bash
 
 	cp arch/arm/boot/zImage /media/emsym/udisk
-	cp arch/arm/boot/dts/imx6dl-blurr.dtb /media/emsym/udisk
-	# 在这儿为了省事，同学们可直接将zImage和imx6dl-blurr.dtb这两个文件复制到SD卡的第一个分区
+	arch/arm/boot/dts/imx6dl-blurr.dtb /media/emsym/udisk
+	# 在自己电脑上，将emsym改为自己的登录名，udisk改为你自己SD卡第二个分区属性里面的名字
 
 启动
 +++++++++
@@ -133,6 +130,7 @@ SD卡需要创建2个分区，并且在第一个分区之前预留一段>=1MB的
 启动U-boot
 在windows pc上下好串口调试软件putty，用一根数据线连接blurr和pc(**注意：mini USB一端插在靠近两个USB插口的那个插口上**)
 打开设备管理器，点开端口，查看括号内显示的COM编号，打开putty，选择Serial，将COM1改为之前查到的COM编号，speed改为115200，然后最下点击open
+
 blurr上电，此时应该看到输出。
 
 输入
