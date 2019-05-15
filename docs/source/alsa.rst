@@ -7,7 +7,7 @@ ALSA播放WAV音频
 直接编译
 ----------------------------
 
-- PC环境安装
+- **PC环境安装**
 
 从ALSA官网（https://www.alsa-project.org/main/index.php/Main_Page）下载alsa-lib，这里以alsa-lib-1.1.5为例。
 解压下载下来的ALSA库压缩包，并进入解压后的文件目录：
@@ -23,7 +23,7 @@ ALSA播放WAV音频
     sudo make
     sudo make install
 
-- 直接编译
+- **直接编译**
 
 在PC（Linux操作系统）上，打开终端，进入到c源文件所在的目录，编译时连接ALSA库和线程库：
 ::
@@ -41,7 +41,7 @@ ALSA播放WAV音频
 交叉编译
 ----------------------------
 
-- PC环境安装
+- **PC环境安装**
 
 在这里要使用arm-linux-gnueabihf工具链来交叉编译c源文件，生成的可执行文件才可以移植到blurr板上运行。
 首先在Linux系统上要安装工具链：
@@ -65,21 +65,21 @@ ALSA播放WAV音频
 
     sudo cp libasound.so.2.0.0 /usr/arm-linux-gnueabihf/lib
 
-- 交叉编译
+- **交叉编译**
 
 交叉编译时，需要连接lasound和lpthread库：
 ::
 
     arm-linux-gnueabihf-gcc wavplayer.c -o wavplayer -lasound -lpthread
 
-- Blurr环境安装
+- **Blurr环境安装**
 
 在blurr板上也需要安装ALSA库：
 ::
 
     rpm -ivh alsa-lib-dev-1.1.0-r0.cortexa9hf_neon_mx6qdl.rpm
 
-- 运行
+- **运行**
 
 将交叉编译好的可执行文件wavplayer和wav音频文件（high.wav，middle.wav，low.wav）通过U盘拷贝到blurr板上。
 首先将U盘插在blurr板的USB口上，挂载进来：
@@ -102,9 +102,3 @@ ALSA播放WAV音频
 
 将耳机插入blurr板绿色耳机孔中，就可以听到播放出的wav音频。
 
-
-ALSA讲解
-----------------------------
-
-- 1ALSA介绍
-ALSA是Advanced Linux Sound Architecture，高级Linux声音架构的简称，它在Linux操作系统上提供了音频和MIDI（MusicalInstrument Digital Interface，音乐设备数字化接口）的支持。
