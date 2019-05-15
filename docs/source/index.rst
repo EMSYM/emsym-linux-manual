@@ -19,6 +19,7 @@ Contents:
    network
    develop
    diy
+   alsa
 
 
 
