@@ -413,7 +413,7 @@ API操作的是逻辑设备名而不是设备文件，设备名可以是真正�
 
 将耳机插入blurr板绿色耳机孔中，就可以听到播放出的wav音频。
 
-.. image:: images/alsa1.png
+.. image:: ../images/alsa1.png
     :alt: alsa
     :width: 640px
 
