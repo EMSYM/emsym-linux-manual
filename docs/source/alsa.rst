@@ -7,14 +7,12 @@ ALSA播放WAV音频
 ALSA讲解
 ----------------------------
 
-- ALSA介绍
+- **ALSA介绍**
 
 ALSA是Advanced Linux Sound Architecture，高级Linux声音架构的简称。
 它包含一组kernel驱动，一个应用编程接口(API)库以及一组工具函数。
 
-（1）ALSA架构
-
-ALSA API可以分为以下几个主要部分：
+（1）ALSA API
 
   + Control 接口：一个通用的功能，用来管理声卡的寄存器以及查询可用设备。
   + PCM 接口：管理数字audio capture和playback的接口，这是audio应用最常用的接口。
@@ -40,7 +38,7 @@ API操作的是逻辑设备名而不是设备文件，设备名可以是真正�
         read PCM data(capture) or write PCM data(playback)  
     close interface
 
-- 代码讲解
+- **代码讲解**
 
 指定使用最新的ALSA API：
 ::
@@ -64,7 +62,7 @@ API操作的是逻辑设备名而不是设备文件，设备名可以是真正�
     #define u8  unsigned char
     #define u16 unsigned short
 
-WAV音频格式和头部结构体：
+定义WAV音频格式和头部结构体：
 ::
 
     typedef  struct
@@ -105,7 +103,7 @@ WAV音频格式和头部结构体：
     u32 g_bufsize;
     char filename[30];    //音频文件全局变量
 
-打开WAV文件并输出其头部信息：
+定义一个函数，打开给定的WAV文件，输出其头部信息：
 ::
 
     FILE * open_and_print_file_params(char *file_name)
@@ -137,7 +135,7 @@ WAV音频格式和头部结构体：
         return fp;
     }
 
-设置PCM硬件参数：
+定义一个函数，设置PCM硬件参数：
 ::
 
     int set_hardware_params()
@@ -243,7 +241,7 @@ WAV音频格式和头部结构体：
         return -1;
     }
 
-定义播放WAV音频函数：
+定义播放函数，播放指定的WAV音频：
 ::
 
     int play_wav(char *file)
@@ -286,7 +284,7 @@ WAV音频格式和头部结构体：
         return 1;
     }
 
-播放线程中调用播放函数：
+定义播放线程函数，调用播放函数，播放一次WAV音频：
 ::
 
     void *play_thread()
@@ -294,7 +292,7 @@ WAV音频格式和头部结构体：
         play_wav(filename);
     }
 
-主函数中定义一个播放线程播放，播放指定的WAV音频：
+主函数中定义一个播放线程，播放指定的WAV音频，并等待播放结束：
 ::
 
     int main()
