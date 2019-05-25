@@ -355,7 +355,7 @@ API操作的是逻辑设备名而不是设备文件，设备名可以是真正�
 - **PC环境安装**
 
 在这里要使用arm-linux-gnueabihf工具链来交叉编译c源文件，生成的可执行文件才可以移植到blurr板上运行。
-首先在Linux系统上要安装工具链：
+首先在Linux系统上安装工具链：
 ::
 
     sudo apt-get install gcc-arm-linux-gnueabihf
@@ -378,12 +378,31 @@ API操作的是逻辑设备名而不是设备文件，设备名可以是真正�
 
 - **交叉编译**
 
-交叉编译时，需要连接lasound和lpthread库：
+交叉编译时，同样需要连接lasound和lpthread库：
 ::
 
     arm-linux-gnueabihf-gcc wavplayer.c -o wavplayer -lasound -lpthread
 
-- **Blurr环境安装**
+- **Blurr启动与环境安装**
+
+按照一下连接方式将blurr板通过USB线连接至电脑，并插上电源为其供电。
+
+先查找blurr板连接的端口号（这里是/dev/ttyUSB0），然后使用picocom命令连接：
+::
+
+    sudo picocom -b 115200 /dev/ttyUSB0
+
+然后在blurr板上按下reset键，可以看到一下启动信息：
+
+.. image:: ../images/blurr1.png
+    :alt: blurr
+    :width: 540px
+
+启动加载完后，输入登录名root即可进行blurr板文件系统中：
+
+.. image:: ../images/blurr2.png
+    :alt: blurr
+    :width: 540px
 
 在blurr板上也需要安装ALSA库：
 ::
