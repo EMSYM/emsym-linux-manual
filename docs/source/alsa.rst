@@ -385,22 +385,26 @@ API操作的是逻辑设备名而不是设备文件，设备名可以是真正�
 
 - **Blurr启动与环境安装**
 
-按照一下连接方式将blurr板通过USB线连接至电脑，并插上电源为其供电。
+按照以下连接方式将blurr板通过USB线连接至电脑，并插上电源为其供电。
 
-先查找blurr板连接的端口号（这里是/dev/ttyUSB0），然后使用picocom命令连接：
+.. image:: ../images/blurr1.jpg
+    :alt: blurr
+    :width: 640px
+
+然后查找blurr板连接的端口号（这里是/dev/ttyUSB0），使用picocom命令连接：
 ::
 
     sudo picocom -b 115200 /dev/ttyUSB0
 
-然后在blurr板上按下reset键，可以看到一下启动信息：
+再在blurr板上按下reset键，就可以看到一下启动信息：
 
-.. image:: ../images/blurr1.png
+.. image:: ../images/blurr2.png
     :alt: blurr
     :width: 540px
 
-启动加载完后，输入登录名root即可进行blurr板文件系统中：
+启动加载完后，输入登录名root即可进入blurr板文件系统中：
 
-.. image:: ../images/blurr2.png
+.. image:: ../images/blurr3.png
     :alt: blurr
     :width: 540px
 
@@ -412,7 +416,13 @@ API操作的是逻辑设备名而不是设备文件，设备名可以是真正�
 - **运行**
 
 将交叉编译好的可执行文件wavplayer和wav音频文件（high.wav，middle.wav，low.wav）通过U盘拷贝到blurr板上。
-首先将U盘插在blurr板的USB口上，挂载进来：
+首先将U盘插在blurr板的USB口上：
+
+.. image:: ../images/blurr4.jpg
+    :alt: blurr
+    :width: 640px
+
+然后将U盘挂载进来：
 ::
 
     mount /dev/sda1 /mnt
