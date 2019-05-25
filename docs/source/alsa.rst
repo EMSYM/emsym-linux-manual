@@ -415,14 +415,14 @@ API操作的是逻辑设备名而不是设备文件，设备名可以是真正�
 
 - **运行**
 
-将交叉编译好的可执行文件wavplayer和wav音频文件（high.wav，middle.wav，low.wav）通过U盘拷贝到blurr板上。
-首先将U盘插在blurr板的USB口上：
+先将交叉编译好的可执行文件wavplayer和三个wav音频文件拷贝到U盘中，
+然后把U盘插在blurr板的USB口上：
 
 .. image:: ../images/blurr4.jpg
     :alt: blurr
     :width: 640px
 
-然后将U盘挂载进来：
+再将U盘挂载进来：
 ::
 
     mount /dev/sda1 /mnt
