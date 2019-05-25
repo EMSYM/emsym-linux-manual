@@ -400,13 +400,13 @@ API操作的是逻辑设备名而不是设备文件，设备名可以是真正�
 
 .. image:: ../images/blurr2.png
     :alt: blurr
-    :width: 540px
+    :width: 640px
 
 启动加载完后，输入登录名root即可进入blurr板文件系统中：
 
 .. image:: ../images/blurr3.png
     :alt: blurr
-    :width: 540px
+    :width: 640px
 
 在blurr板上也需要安装ALSA库：
 ::
